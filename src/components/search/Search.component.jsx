@@ -1,7 +1,9 @@
 import React, {useState, useContext} from 'react';
+import GitHubContext from '../../context/github/GitHub.context';
 
 const Search = () => {
     const [text, setText] = useState('')
+	const {users, searchUsers, clearUsers} = useContext(GitHubContext)
 
     const handleChange = event => setText(event.target.value);
     const handleSubmit = event => {
@@ -10,6 +12,7 @@ const Search = () => {
         if(text === '') {
             // add something here later
         } else {
+			searchUsers(text)
             setText('')
         }
     };
@@ -31,9 +34,10 @@ const Search = () => {
 					</div>
 				</form>
 			</div>
-			<div>
-				<button className='btn btn-ghost btn-lg'>Clear</button>
-			</div>
+			{users.length > 0 && (<div>
+				<button onClick={clearUsers} className='btn btn-ghost btn-lg'>Clear</button>
+			</div>)}
+			
 			
 		</div>
 	);

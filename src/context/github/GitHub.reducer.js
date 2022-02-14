@@ -1,4 +1,4 @@
-import GitHubActionTypes from "./GitHub.types";
+import GitHubActionTypes from './GitHub.types';
 
 const gitHubReducer = (state, action) => {
 	switch (action.type) {
@@ -12,6 +12,11 @@ const gitHubReducer = (state, action) => {
 			return {
 				...state,
 				isLoading: true,
+			};
+		case GitHubActionTypes.CLEAR_USERS:
+			return {
+				...state,
+				users: [],
 			};
 		default:
 			return state;
