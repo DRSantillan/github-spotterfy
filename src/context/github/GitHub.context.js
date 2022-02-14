@@ -1,4 +1,6 @@
-import { createContext,useState } from 'react';
+import { createContext, useReducer, useState } from 'react';
+import gitHubReducer from './GitHub.reducer';
+import GitHubActionTypes from './GitHub.types';
 
 const GitHubContext = createContext();
 
@@ -6,10 +8,14 @@ const GITHUB_URL = process.env.REACT_APP_GITHUB_URL;
 const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN;
 
 export const GitHubProvider = ({ children }) => {
-	const [users, setUsers] = useState([]);
-	const [isLoading, setIsLoading] = useState(true);
+	const initialState = {
+		users: [],
+		isLoading: false,
+	};
+	const [state, dispatch] = useReducer(gitHubReducer, initialState);
 
 	const fetchUsers = async () => {
+		setLoading();
 		const response = await fetch(`${GITHUB_URL}/users`, {
 			method: 'GET',
 			headers: {
@@ -17,12 +23,19 @@ export const GitHubProvider = ({ children }) => {
 			},
 		});
 		const data = await response.json();
-		setUsers(data);
-		setIsLoading(false);
-		console.log(data);
+
+		dispatch({ type: GitHubActionTypes.GET_USERS, payload: data });
 	};
+	// set loading
+	const setLoading = () => dispatch({ type: 'SET_LOADING' });
 	return (
-		<GitHubContext.Provider value={{ users, isLoading, fetchUsers }}>
+		<GitHubContext.Provider
+			value={{
+				users: state.users,
+				isLoading: state.isLoading,
+				fetchUsers,
+			}}
+		>
 			{children}
 		</GitHubContext.Provider>
 	);
