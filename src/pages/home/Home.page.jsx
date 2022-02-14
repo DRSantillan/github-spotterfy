@@ -1,9 +1,12 @@
 import React from 'react';
+import UserSearchResults from '../../components/users/users-search-results/UserSearchResults.component';
+import Search from '../../components/search/Search.component';
 
 const Home = () => {
-	return <div>
+	return <>
         <h1 className="text-6xl">Welcome To GitHub SpoTTerfy.</h1>
-        {/* {process.env.REACT_APP_GITHUB_TOKEN} */}
-    </div>;
+        <Search/>
+        <UserSearchResults/> 
+    </>;
 };
 export default Home;
