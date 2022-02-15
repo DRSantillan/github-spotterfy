@@ -1,8 +1,10 @@
 const GitHubActionTypes = {
 	GET_USERS: 'GET_USERS',
 	GET_USER: 'GET_USER',
+	GET_USER_AND_REPOS: 'GET_USER_AND_REPOS',
 	SET_LOADING: 'SET_LOADING',
 	CLEAR_USERS: 'CLEAR_USERS',
+	SEARCH_USERS: 'SEARCH_USERS',
 };
 
 export default GitHubActionTypes;

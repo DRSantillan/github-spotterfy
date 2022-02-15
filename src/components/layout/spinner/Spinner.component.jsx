@@ -10,7 +10,6 @@ const Spinner = () => {
 				width={180}
 				className='text-center mx-auto'
 			/>
-			;
 		</div>
 	);
 };

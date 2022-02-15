@@ -5,15 +5,23 @@ import GitHubContext from '../../context/github/GitHub.context';
 import { FaCodepen, FaStore, FaUserFriends, FaUsers } from 'react-icons/fa';
 import Spinner from '../../components/layout/spinner/Spinner.component';
 import { Link } from 'react-router-dom';
+import RepoList from '../../components/repos/RepoList.component';
+import { getUserAndRepos } from '../../context/github/GitHub.actions';
+import GitHubActionTypes from '../../context/github/GitHub.types';
 
 const UserProfile = () => {
 	const params = useParams();
 
-	const { fetchUser, user, isLoading } = useContext(GitHubContext);
+	const { user,repos,dispatch, isLoading } = useContext(GitHubContext);
 
 	useEffect(() => {
-		fetchUser(params.login);
-	}, []);
+        dispatch({type: GitHubActionTypes.SET_LOADING})
+		const getUserData = async() => {
+            const userData = await getUserAndRepos(params.login)
+            dispatch({type: GitHubActionTypes.GET_USER_AND_REPOS, payload: userData})
+        }
+        getUserData()
+	}, [dispatch, params.login]);
 
 	const {
 		name,
@@ -167,6 +175,7 @@ const UserProfile = () => {
 						</div>
 					</div>
 				</div>
+                <RepoList repos={repos} />
 			</div>
 		</>
 	);

@@ -5,11 +5,8 @@ import About from '../pages/about/About.page';
 import NotFound from '../pages/notfound/NotFound.page';
 import UserProfile from '../pages/user/UserProfile.page';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import GitHubContext, {
-	GitHubProvider,
-} from '../context/github/GitHub.context';
+import { GitHubProvider } from '../context/github/GitHub.context';
 import { AlertProvider } from '../context/alert/Alert.context';
-import Alerter from '../components/layout/alert/Alert.component';
 
 function App() {
 	return (
@@ -26,13 +23,15 @@ function App() {
 									path='/about'
 									element={<About />}
 								/>
-								<Route path='/user/:login' element={<UserProfile/>}/>
+								<Route
+									path='/user/:login'
+									element={<UserProfile />}
+								/>
 								<Route
 									path='/notfound'
 									element={<NotFound />}
 								/>
 								<Route path='/*' element={<NotFound />} />
-								
 							</Routes>
 						</main>
 						<Footer />

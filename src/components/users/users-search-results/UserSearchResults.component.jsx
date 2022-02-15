@@ -7,13 +7,10 @@ const UserSearchResults = () => {
 	// state
 	const {users, isLoading} = useContext(GitHubContext)
 	
-
-
-	
     if(!isLoading){
         return <div className="grid grid-cols-1 gap-8 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2">
         {users.map((user) => (<UserSearchResultItem key={user.id} user={user}/>))}
-    </div>;
+    </div>
     } else {
         return <Spinner/>
     }
