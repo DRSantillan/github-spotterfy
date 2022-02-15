@@ -14,7 +14,7 @@ const UserSearchResultItem = ({ user: { login, avatar_url, repos_url } }) => {
             </div>
             <div>
                 <h2 className="card-title">{login}</h2>
-                <Link to={`/users/${login}`} className='text-base-content text-opacity-40'>
+                <Link to={`/user/${login}`} className='text-base-content text-opacity-40'>
                     View Profile
                 </Link>
             </div>
